@@ -6,12 +6,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 
 import androidx.navigation.compose.rememberNavController
 import com.mobile.flai.ui.screens.ChatScreen
 import com.mobile.flai.ui.theme.FlaiTheme
+import com.mobile.flai.viewmodels.ChatViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 
@@ -39,6 +41,8 @@ class MainActivity : ComponentActivity() {
     fun AppNavigation() {
 
         val navController = rememberNavController()
+        val chatViewModel  : ChatViewModel = hiltViewModel()
+
 
         NavHost(
             navController = navController,
@@ -46,7 +50,7 @@ class MainActivity : ComponentActivity() {
         ) {
 
             composable(DestinationScreen.chatScreen.route) {
-                ChatScreen()
+                ChatScreen(chatViewModel)
             }
         }
 
